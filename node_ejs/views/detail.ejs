@@ -1,0 +1,243 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>평가 결과 | 자기소개서 평가시스템</title>
+    <% include ./partials/stylesheet %>
+    <% include ./partials/javascript %>
+    <!-- <script type="text/javascript" src="views/jquery.min.js"></script> -->
+    <link rel="stylesheet" href="/javascripts/jquery/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src='/javascripts/detail.js'></script>
+  </head>
+  <body>
+    <div id="skip-navi">
+    	<a href="#main-container" title="본문 바로가기">본문 바로가기</a>
+    </div>
+    <div id="wrap">
+      <!-- 헤더 영역 시작 -->
+      <% include ./partials/header %>
+      <!-- 헤더 영역 끝-->
+      <div class="detailInner">
+        <h2 class="type3">평가 결과</h2>
+      </div>
+      <!-- 지원자 시작 -->
+      <div class="applicantWrap">
+        <div class="inner">
+          <h4 class="type1">개별 분석 <span class="toggleResult on"></span></h4>
+          <div class="applicant">
+            <ul>
+              <li>번호 <span class="type1"><%= SqlEvListTotScore.apply_id %></span></li>
+              <li>이름 <span class="type1"><%= SqlEvListTotScore.han_nm %></span></li>
+            </ul>
+
+          </div>
+          <!-- 검색 시작 -->
+          <form action="/main/evDetail/search" class="searchWrap">
+            <fieldset>
+              <legend>평가대상자 검색폼</legend>
+              <input type="text" name="keyowrd" id="search" placeholder="지원자 검색" class="search"><input type="submit" value="검색" class="btnSearch">
+            </fieldset>
+          </form>
+          <!-- 검색 끝 -->
+        </div>
+      </div>
+      <!-- 지원자 끝 -->
+
+        <!-- 분석결과 시작-->
+        <div class="resultWrap on">
+          <!--점수 시작 -->
+          <div class="scoreWrap">
+            <h3>점수</h3>
+            <div class="scoreBox_total"><span>총 <strong><%= SqlEvListTotScore.tot_score %></strong>점</span></div>
+            <ul>
+              <li class="scoreBox_01"><span class="score"><%=SqlEvListTotScore.q_score1 %></span> / 5 <span class="item"><%= SqlEvCriteria[0].q_tlnt_desc %></span></li>
+              <li class="scoreBox_02"><span class="score"><%=SqlEvListTotScore.q_score2 %></span> / 5 <span class="item"><%= SqlEvCriteria[1].q_tlnt_desc %></span></li>
+              <li class="scoreBox_03"><span class="score"><%=SqlEvListTotScore.q_score3 %></span> / 5 <span class="item"><%= SqlEvCriteria[2].q_tlnt_desc %></span></li>
+              <li class="scoreBox_04"><span class="score"><%=SqlEvListTotScore.q_score4 %></span> / 5 <span class="item"><%= SqlEvCriteria[3].q_tlnt_desc %></span></li>
+            </ul>
+          </div>
+          <!--점수 끝 -->
+
+          <!-- 워드 클라우드 시작 -->
+          <div class="wordcloudWrap">
+            <h3>키워드</h3>
+            <img src="/images/img/WCloud/<%= SqlEvListTotScore.apply_id %>.jpg" alt="워드 클라우드">
+          </div>
+          <!-- 워드 클라우드 끝 -->
+
+          <!-- 스파이더 차트 시작 -->
+          <div class="spiderWrap">
+            <h3>성향</h3>
+            <img src="/images/img/PI/<%= SqlEvListTotScore.apply_id %>.png" alt="스파이더 차트">
+          </div>
+          <!-- 스파이더 차트 끝 -->
+        </div>
+        <!-- 분석결과 끝-->
+
+      <div id="main-container">
+        <!-- 컨텐츠 영역 시작 -->
+        <div class="contentWrap">
+          <h4>상세 분석</h4>
+          <!-- 기준1 영역시작 -->
+          <% for( i = 0 ; i < 4; i++) { %>
+          <div class="detailWrap">
+            <div class="detailBox">
+              <!-- 그래프 영역 시작 -->
+              <div class="graphBox">
+
+                <h5><%= SqlEvCriteria[i].q_tlnt_desc%>
+                  <%if (i ==0 ) { %>
+                  <span class="detailScore type1"> 총 <strong><%= SqlEvListTotScore.q_score1 %></strong>점 / 5 </span>
+                  <%} else if (i ==1) { %>
+                  <span class="detailScore type1"> 총 <strong><%= SqlEvListTotScore.q_score1 %></strong>점 / 5 </span>
+                  <%} else if (i ==2) { %>
+                  <span class="detailScore type1"> 총 <strong><%= SqlEvListTotScore.q_score2 %></strong>점 / 5 </span>
+                  <%} else if (i ==3) { %>
+                  <span class="detailScore type1"> 총 <strong><%= SqlEvListTotScore.q_score3 %></strong>점 / 5 </span>
+                  <%} %>
+                </h5>
+
+                <div class="barGraph">
+
+                 <div class="graph">
+
+                   <% for( index = i*4, len = index + 4, j=0 ; index < len; index++, j++) { %>
+                    <span class="graph-barBack">
+                      <%if (j ==0 ) { %>
+                      <span class="graph-legend"><%= SqlEvCriteria[i].c1_desc%></span>
+                      <%} else if (j ==1) { %>
+                      <span class="graph-legend"><%= SqlEvCriteria[i].c2_desc%></span>
+                      <%} else if (j ==2) { %>
+                      <span class="graph-legend"><%= SqlEvCriteria[i].c3_desc%></span>
+                      <%} else if (j ==3) { %>
+                      <span class="graph-legend"><%= SqlEvCriteria[i].c4_desc%></span>
+                      <%} %>
+
+                     <div id="graphBg_<%= (j*1)+1 %>">
+                       <a href="#none1" class="graph-bg" onclick='toggleGT(this,"<%= i %>","<%= j %>","<%= SqlEvListScore[index].ground_stc_text_1 %>","<%= SqlEvListScore[index].ground_stc_text_2 %>","<%= SqlEvListScore[index].ground_stc_text_3 %>" )'>
+                         <span class="graph-bar type<%= (j*1)+1 %>"  data-value="<%=(SqlEvListScore[index].scoring_point*1)*20 %>"><span class="score"><%=SqlEvListScore[index].scoring_point %></span></span></a>
+                    </div>
+                    </span>
+                    <% } %>
+
+                 </div>
+               </div>
+
+              </div>
+              <!-- 그래프 영역 끝 -->
+              <div class="textArea">
+                <div class="uiTooltip" id="sumText<%= i %>" title="<%=sumText[i]%>">
+                  <div id="fullText_<%= i %>" class="contents">
+                    <div class="fullText1" >
+                      <!-- <%=SqlEvListText %> -->
+                    </div>
+                  </div>
+                  <div id="fullTextSrc_<%= i %>" style="display:none" >
+                    <%=SqlEvListText[i].text %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+          <!-- 기준1 영역끝 -->
+
+
+          <!-- 기준4 영역끝 -->
+        </div>
+        <!-- 컨텐츠 영역 끝 -->
+
+        <!--right 영역 시작 -->
+        <div class="rightWrap">
+          <div class="evList">
+            <h4>평가 대상</h4>
+            <div class="scrollWrap">
+              <table>
+                <caption>평가대상자 리스트</caption>
+                <colgroup>
+                  <col style="width:50%">
+                  <col style="width:*">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <!-- <tr class="selected">
+                    <td><strong><a href="#"><%= SqlEvListTotScore.sse_scoring_ApId %></a></strong></td>
+                    <td><strong><a href="#"><%= SqlEvListTotScore.sse_scoring_nm %></a></strong></td>
+                  </tr> -->
+                  <% for( index in SqlEvListNum ) { %>
+                    <% if( SqlEvListNum[index].apply_id == SqlEvListTotScore.sse_scoring_ApId) { %>
+                      <tr class="selected">
+                          <td><strong><a href="#none1" ><%=SqlEvListNum[index].apply_id %></a></strong></td>
+                          <td><span class="name"><a href="#none1" ><%=SqlEvListNum[index].han_nm %></a></span></td>
+                      </tr>
+                      <% } else {%>
+                    <tr id="evListTr">
+                      <!-- [D] 상위랭크는 best 클래스 추가 -->
+                      <td >
+                          <strong><a href="#none1" onclick="location.href='/main/evDetail?id=<%=SqlEvListNum[index].apply_id%>'"><%=SqlEvListNum[index].apply_id %></a></strong>
+                      </td>
+                      <td >
+                          <span class="name"><a href="#none1" onclick="location.href='/main/evDetail?id=<%=SqlEvListNum[index].apply_id%>'"><%=SqlEvListNum[index].han_nm %></a></span>
+                      </td>
+                    </tr>
+                    <% } %>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+            <!--div class="pagination">
+              <ul>
+                <li class="prev"><a href="#">prev</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li class="next"><a href="#">next</a></li>
+              </ul>
+            </div-->
+          </div>
+        </div>
+        <!--right 영역 끝 -->
+
+        <!-- 버튼영역 시작 -->
+        <div class="btnWrap">
+          <input type="button" class="btn" value="이전화면" onclick="javascrip:history.back();">
+          <input type="button" class="btn" value="메인화면" onclick="clickLoad();">
+          <input type="button" class="btn" value="종료" onclick="location.href='/users/logout'">
+        </div>
+        <!-- 버튼영역 끝 -->
+
+      </div>
+      <!-- 컨텐츠 영역 끝 -->
+
+      <!-- 푸터 영역 시작 -->
+      <div id="footer">
+         Copyright ⓒ 2018 All Rights Reserved.
+      </div>
+      <!-- 푸터 영역 끝 -->
+    </div>
+
+    <!-- modal 시작 -->
+    <div class="dim"></div>
+    <div class="modal">
+      <div class="modalTop">Error</div>
+      <div class="modalContent">
+        불편을 끼쳐 드려서 죄송합니다.<br>
+        <span class="type1">잠시 후 다시 시도해 주세요.</span>
+        <span class="btnConfirm">확인</span>
+      </div>
+    </div>
+
+    <!-- modal 끝 -->
+  </body>
+</html>

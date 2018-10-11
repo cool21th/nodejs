@@ -1,0 +1,174 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>평가실행 | 자기소개서 평가시스템</title>
+    <% include ./partials/stylesheet %>
+    <% include ./partials/javascript %>
+    <script type="text/javascript" src="/javascripts/jquery/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/javascripts/jquery/jquery-ui.css">
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
+    <script src='/javascripts/evExecute.js'></script>
+  </head>
+  <body>
+
+    <div id="skip-navi">
+    	<a href="#main-container" title="본문 바로가기">본문 바로가기</a>
+    </div>
+    <div id="wrap">
+      <!-- 헤더 영역 시작 -->
+      <% include ./partials/header %>
+      <!-- 헤더 영역 끝-->
+
+      <div id="main-container">
+        <div class="inner">
+          <h2 class="type1">평가 실행
+
+            <span id ="evalRowsSpan" style="display:none"><%=pageRows%></span>
+            <span style="float:right;" >
+                <select id="evalRows" class="evalRows" name="evalRows">
+                  <option value="" selected disabled>Rows</option>
+                  <option value="10">10개씩 보기</option>
+                  <option value="30">30개씩 보기</option>
+                  <option value="50">50개씩 보기</option>
+                  <option value="100">100개씩 보기</option>
+                  <option value="200">200개씩 보기</option>
+                </select>
+            </span>
+            <span style="float:right;" ><input type="button" class ="btnExcel" value="액셀다운로드" onclick="clickExcelDown();"> </span>
+          </h2>
+          <form action="#">
+            <fieldset>
+              <legend>평가대상 분석</legend>
+              <div class="evListWrap">
+                <table class="evList">
+                  <caption>평가대상 리스트</caption>
+                  <colgroup>
+                    <col style="width:5%;">
+                    <col style="width:13%;">
+                    <col style="width:10%;">
+                    <%if(evCriteria.length>0){%>
+                      <% for (index in evCriteria) {%>
+                        <col style="width:40/<%=evCriteria.length %>%;">
+                      <% } %>
+                      <%} else {%>
+                        <col style="width:40%;">
+                      <% } %>
+                    <col style="width:18%;">
+                  </colgroup>
+                  <tr>
+                    <th><input type="checkbox" name="checkall" class="check" id="check_all" /><label for="check_all"><label></th>
+                    <th>수험번호</th>
+                    <th>이름</th>
+                    <%if(evCriteria.length>0){%>
+                      <% for (index in evCriteria) {%>
+                        <th style="font-size:14px" ><%= evCriteria[index].q_tlnt_desc%><br>(5점)</th>
+                      <% } %>
+                      <%} else {%>
+                        <th>
+                          기준이 없습니다.
+                        </th>
+                      <% } %>
+                    <th>상태</th>
+                  </tr>
+                  <div id="evListWrapInner">
+
+                        <%if(evListNum.length>0){%>
+                            <% for( index = start; index < end; index++ ) { %>
+                              <tr>
+                              <%if(evListNum[index].eval_yn == 'Y') {%>
+                                <td><input type="checkbox" class="check" id="check_<%=index %>" disabled=true><label for="check_<%=index %>"><label></td>
+                                <%} else {%>
+                                <td><input type="checkbox" name="check" class="check" id="check_<%=index %>"><label for="check_<%=index %>"><label></td>
+                                <% } %>
+                                <td><label for="check_<%=index %>"><%=evListNum[index].apply_id %></label></td>
+                                <td><label for="check_<%=index %>"><%=evListNum[index].han_nm %></label></td>
+                                <td><label for="check_<%=index %>" id="basicSc1<%=evListNum[index].apply_id%>"><%=evListNum[index].q1_score %></label>
+                                  <span style="display:none" id="changeSc1<%=evListNum[index].apply_id%>"></span></td>
+                                <td><label for="check_<%=index %>" id="basicSc2<%=evListNum[index].apply_id%>"><%=evListNum[index].q2_score %></label>
+                                  <span style="display:none" id="changeSc2<%=evListNum[index].apply_id%>"></span></td>
+                                <td><label for="check_<%=index %>" id="basicSc3<%=evListNum[index].apply_id%>"><%=evListNum[index].q3_score %></label>
+                                  <span style="display:none" id="changeSc3<%=evListNum[index].apply_id%>"></span></td>
+                                <td><label for="check_<%=index %>" id="basicSc4<%=evListNum[index].apply_id%>"><%=evListNum[index].q4_score %></label>
+                                  <span style="display:none" id="changeSc4<%=evListNum[index].apply_id%>"></span></td>
+                              <%if(evListNum[index].eval_yn == 'Y') {%>
+                                <!-- <td><%= evListNum[index].eval_yn %></td> -->
+                                <td><a href="/main/evDetail?id=<%=evListNum[index].apply_id%>"><span class="btnResult" id="completed_<%=evListNum[index].apply_id%>">완료/상세결과</span></a>
+                                <span class="disabled" style="display:none"  id="notExe_<%=evListNum[index].apply_id%>">미실행</span>
+                                <span class="analysis" style="display:none" id="analysis_<%=evListNum[index].apply_id%>">분석중</span></td>
+                              <%} else {%>
+                                <td ><a href="/main/evDetail?id=<%=evListNum[index].apply_id%>"><span class="btnResult" style="display:none" id="completed_<%=evListNum[index].apply_id%>">완료/상세결과</span></a>
+                                <span class="disabled" id="notExe_<%=evListNum[index].apply_id%>">미실행</span>
+                                <span class="analysis" style="display:none" id="analysis_<%=evListNum[index].apply_id%>">분석중</span></td>
+                                <!-- <td><span class="analysis" style="display:none" id="analysis_<%=index %>">분석중</span></td> -->
+                              <% } %>
+                              </tr>
+                            <% } %>
+                          <%} else {%>
+                              <tr>
+                                <td colspan="5">게시물이 없습니다.</td>
+                              </tr>
+                        <%}%>
+                  </div>
+                </table>
+
+                <!-- pagination 시작 -->
+                <div class="pagination">
+                    <ul>
+                      <li style ="border:0px;"><a href="#" onclick='clickPageLoad("0")'>First</a></li>
+                      <!-- <li class="prev"><a style="display:block;" href="#" onclick='clickPageLoad("<%=(mainIndex*1)-2 %>")'>prev</a></li> -->
+                      <% for(i=startIndex; i< endIndex; i++) { %>
+                      <% if (mainIndex == i) {%>
+                      <li><a href="#none" class="on"><%= (i*1)+1 %></a></li>
+                      <% } else {%>
+                      <li><a href="#" onclick='clickPageLoad("<%=i %>")'><%= (i*1)+1 %></a></li>
+                      <% } %>
+                      <% } %>
+                      <!-- <li class="next"><a style="display:block;" href="#" onclick='clickPageLoad("<%=(mainIndex*1)+2 %>")'>next</a></li> -->
+                      <li style ="border:0px; margin-left: 1px;"><a href="#" onclick='clickPageLoad("<%=(pageInfo*1)-1 %>")'>Last</a></li>
+                    </ul>
+                </div>
+                <!-- pagination 끝 -->
+              </div>
+
+              <!-- 하단 버튼 영역 시작 -->
+              <div class="btnWrap">
+                <input type="button" class="btn" id="footer_btn0" value="로드" onclick="clickLoad();">
+                <!-- <input type="button" class="btn" id="footer_btn1" value="평가실행" onclick="evaluate_exe();"> -->
+                <input type="button" class="btn type1" id="footer_btn2" value="상세결과" onclick="detail_click();">
+                <!-- <input type="button" class="btn type3" id="footer_btnAll" value="전체평가 실행" onclick="evaluate_all_exe('<%= cnt3 %>')"> -->
+                <input type="button" class="btn type2" id="footer_btn3" value="종료" onclick="location.href='/users/logout'">
+                <!-- <input type="button" class="btn type2" id="footer_btn4" value="데이터 초기화" onclick="delete_click();"> -->
+                <!-- <button class="buttonload" style="display:none" id="footer_stopBtn" ><i class="fa fa-spinner fa-spin" ></i>실행중</button> -->
+                <!-- <input type="button" class="btn" style="display:none"  id="footer_stopBtn" value="실행중" onclick="evaluate_ing();"> -->
+              </div>
+              <!-- 하단 버튼 영역 끝 -->
+            </fielset>
+          </form>
+
+        </div>
+      </div>
+
+
+      <!-- 푸터 영역 시작 -->
+      <div id="footer">
+         Copyright ⓒ 2018 All Rights Reserved.
+      </div>
+      <!-- 푸터 영역 끝 -->
+    </div>
+
+    <div class="dim"></div>
+    <div class="modal type3">
+      <div class="modalTop">평가중</div>
+      <!-- <div id="progressbar"></div> -->
+      <div id="progressbar"><div class="progress-label">Loading...</div></div>
+      <div class="modalContent">
+        <div class="modalContent" id="modalSpan">현재 분석중입니다.</div>
+        <input type="button" class="btnConfirm" id="abortAjax" value="중단">
+      </div>
+    </div>
+
+  </body>
+</html>

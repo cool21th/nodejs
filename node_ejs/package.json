@@ -1,0 +1,33 @@
+{
+  "name": "HRDemo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Create an app for HR Recruit Demo",
+  "author": "SeulKi <cool21th@sk.com>",
+  "scripts": {
+    "start": "set NODE_ENV=development&&node ./bin/www",
+    "dev": "set NODE_ENV=development&&node ./bin/www",
+    "prod": "set NODE_ENV=production&&node ./bin/www"
+  },
+  "dependencies": {
+    "async": "^2.6.0",
+    "bcrypt": "^1.0.3",
+    "bluebird": "^3.5.1",
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "^2.5.8",
+    "express": "~4.15.5",
+    "express-flash": "0.0.2",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.1.2",
+    "generic-pool": "^2.5.4",
+    "json2xls": "^0.1.2",
+    "moment": "^2.22.1",
+    "morgan": "~1.9.0",
+    "mysql": "^2.15.0",
+    "python-shell": "^0.4.0",
+    "serve-favicon": "~2.4.5",
+    "watson-developer-cloud": "^3.3.0"
+  }
+}

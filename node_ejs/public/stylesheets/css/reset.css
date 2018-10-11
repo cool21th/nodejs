@@ -1,0 +1,272 @@
+@charset "utf-8";
+
+/* Fonts Setting */
+@font-face{font-family:"NanumGothic"; font-style:normal; font-weight:normal;
+src:url(../font/NanumGothic.woff) format('woff');
+src: local('NanumGothic'), url(../font/NanumGothic.woff) format('woff');}
+@font-face{font-family:"NanumGothicB"; font-style:normal;font-weight:bold;src:url(../font/NanumGothicBold.woff) format('woff');}
+@font-face{font-family:"NanumGothicEB"; font-style:normal;font-weight:bold;src:url(../font/NanumGothicExtraBold.woff) format('woff');}
+
+/* IE7 IE8 */
+@font-face{font-family:"NanumGothic"; font-style:normal; font-weight:normal;
+src:url(../font/NanumGothic.eot);
+src: local('NanumGothic'), url(../font/NanumGothic.eot) format('eot');}
+@font-face{font-family:"NanumGothicB"; font-style:normal;font-weight:bold;src:url(../font/NanumGothicBold.eot) format('eot');}
+@font-face{font-family:"NanumGothicEB"; font-style:normal;font-weight:bold;src:url(../font/NanumGothicExtraBold.eot) format('eot');}
+
+/* --------------------------------------------
+/* reset code */
+/* ------------------------------------------ */
+html, body {
+	width:100%;
+	/*height:100%;*/
+	/*overflow: hidden;*/
+}
+body {
+	font-family:"NanumGothic","돋움",dotum,Verdana;
+	font-size:16px;
+	line-height:1.25;
+	color:#666;
+	background:#fff;
+	/*overflow: hidden;*/
+}
+html,body,div,span,object,iframe,p,blockquote,pre,
+a,abbr,acronym,address,big,cite,code,del,dfn,em,
+img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,
+var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,
+legend,table,caption,tbody,tfoot,thead,tr,th,td,
+article,aside,canvas,details,embed,figure,figcaption,
+footer,header,hgroup,menu,nav,output,ruby,section,
+summary,time,mark,audio,video,h1,h2,h3,h4,h5,h6 {
+	margin:0;
+	padding:0;
+	list-style:none;
+	border : 0 none;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family:"NanumGothicB";
+	letter-spacing:-1.5px;
+}
+address, caption, em, i, b {
+	font-weight : normal;
+	font-style : normal;
+}
+
+a, a:link { font-family:inherit; color:inherit; text-decoration:none; }
+a:visited {
+	color:#666;
+	text-decoration:none;
+}
+a:hover {
+	color:#666;
+	text-decoration:none;
+}
+a:active {
+	color:#666;
+	text-decoration:none;
+}
+a:focus {
+	text-decoration:none;
+}
+a.focus {
+	text-decoration:none;
+}
+
+img {
+	vertical-align:top;
+}
+table {
+	table-layout:fixed;
+	width:100%;
+	border-spacing:0;
+	border-collapse:collapse;
+}
+tbody, tfoot, thead, tr, th, td {
+	word-break:break-all;
+}
+table th{
+	font-family:"NanumGothicB";
+}
+
+div, a { box-sizing:border-box; }
+/* --------------------------------------------
+/* form */
+/* ------------------------------------------ */
+button,
+input[type=button],
+input[type=submit],
+input[type=reset]{
+	cursor:pointer;
+	width:auto;
+	overflow:visible;
+	vertical-align:middle;
+	background:none;
+	margin:0;
+	padding:0;
+}
+input[type=text],
+textarea{
+	box-sizing:content-box;
+}
+
+
+::-webkit-input-placeholder { color:#888; font-family:"NanumGothic"; }
+::-moz-placeholder { color:#888; font-family:"NanumGothic"; }
+:-ms-input-placeholder { color:#888; font-family:"NanumGothic"; }
+:-moz-placeholder { color:#888; font-family:"NanumGothic"; }
+
+
+
+/* Dropdown control */
+.selectBox-dropdown {
+    position: relative;
+	min-width:60px;
+    border: solid 1px #ddd;
+	height:23px;
+	line-height:22px;
+    text-decoration: none;
+    text-align: left;
+    color:#666;
+    vertical-align: middle;
+    background:#fff;
+    display: inline-block;
+    cursor: default;
+	padding-right:6px;
+}
+*+html .selectBox-dropdown,
+.ie9 .selectBox-dropdown,
+.ie10 .selectBox-dropdown,
+.ie11 .selectBox-dropdown{line-height:26px;}
+
+.selectBox-dropdown .selectBox-label {
+    padding:0 8px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+/* Dropdown menu */
+.selectBox-dropdown-menu {
+    position: absolute;
+    z-index: 99999;
+    max-height: 162px;
+    min-height: 1em;
+    border: solid 1px #ddd; /* should be the same border width as .selectBox-dropdown */
+    background: #fff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Inline control */
+.selectBox-inline {
+    min-width: 150px;
+    border: solid 1px #ddd;
+    background:#fff;
+    display: inline-block;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+
+/* Options */
+.selectBox-options,
+.selectBox-options li,
+.selectBox-options li a {
+    list-style: none;
+    display: block;
+    cursor: default;
+    padding: 0;
+    margin: 0;
+}
+
+.selectBox-options li a {
+	height:27px;
+	line-height:27px;
+    padding: 0 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    background: 6px center no-repeat;
+}
+.ie9 .selectBox-options li a,
+.ie10 .selectBox-options li a,
+.ie11 .selectBox-options li a{line-height:32px;}
+
+.selectBox-options li.selectBox-hover a {
+    background-color:#eee;
+}
+
+.selectBox-options li.selectBox-disabled a {
+    color: #888;
+    background-color: transparent;
+}
+
+.selectBox-options li.selectBox-selected a {
+    color:#e0032c;
+}
+
+.selectBox-options .selectBox-optgroup {
+    color: #666;
+    background: #EEE;
+    font-weight: bold;
+    line-height: 1.5;
+    padding: 0 .3em;
+    white-space: nowrap;
+}
+
+/* Disabled state */
+.selectBox.selectBox-disabled {
+    color: #888 !important;
+}
+
+.selectBox-dropdown.selectBox-disabled .selectBox-arrow {
+    opacity: .5;
+    filter: alpha(opacity=50);
+    border-color: #666;
+}
+
+.selectBox-inline.selectBox-disabled {
+    color: #888 !important;
+}
+
+.selectBox-inline.selectBox-disabled .selectBox-options a {
+    background-color: transparent !important;
+}
+
+
+input,button,select,textarea {
+	vertical-align:middle;
+	border:0 none;
+	color:#666;
+	font-family: "돋움",dotum;
+}
+select {
+	border:1px solid #ddd;
+	height:24px;
+}
+button::-moz-focus-inner {
+	padding:0;
+}
+textarea {
+	resize:none;
+	overflow-x:hidden;
+	overflow-y:auto;
+	padding:7px 3px 0 12px;
+	line-height:16px;
+	background:#fff;
+}
+textarea.txtArea{border:1px solid #ddd;}
+input.intx1{
+	margin:0;
+	border:1px solid #ddd;
+	padding:5px 10px 5px;
+	padding:7px 10px 3px \9;
+	height: 12px;
+	line-height:12px;
+	font-size:12px;
+}
+
+caption {width: 0;height: 0;font-size: 0;line-height: 0;overflow: hidden;text-indent: -99999px;}
+.blind{display:block;overflow:hidden;position:absolute;top:-1000em;left:-999em}

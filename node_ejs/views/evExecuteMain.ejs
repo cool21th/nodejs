@@ -1,0 +1,218 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>평가실행 | 자기소개서 평가시스템</title>
+    <% include ./partials/stylesheet %>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div id="skip-navi">
+    	<a href="#main-container" title="본문 바로가기">본문 바로가기</a>
+    </div>
+    <div id="wrap">
+      <!-- 헤더 영역 시작 -->
+      <% include ./partials/header %>
+      <!-- 헤더 영역 끝-->
+
+      <div id="main-container">
+        <div class="inner">
+          <h2 class="type1">평가 실행
+            <span style="float:right;">
+                <select id="evalRows" class="evalRows" name="evalRows">
+                  <option value="" selected disabled>Rows</option>
+                  <option value="10">10개씩 보기</option>
+                  <option value="30" selected="selected">30개씩 보기</option>
+                  <option value="50">50개씩 보기</option>
+                  <option value="100">100개씩 보기</option>
+                </select>
+            </span>
+          </h2>
+          <form action="#">
+            <fieldset>
+              <legend>평가대상 분석</legend>
+              <div class="evListWrap">
+                <table class="evList">
+                  <caption>평가대상 리스트</caption>
+                  <colgroup>
+                    <col style="width:5%;">
+                    <col style="width:13%;">
+                    <col style="width:20%;">
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+                    <col style="width:20%;">
+                  </colgroup>
+                  <tr>
+                    <th><input type="checkbox" class="check" id="check1" disabled><label for="check1"><label></th>
+                    <th>수험번호</th>
+                    <th>이름</th>
+                    <th>평가기준 1</th>
+                    <th>평가기준 2</th>
+                    <th>평가기준 3</th>
+                    <th>평가기준 4</th>
+                    <th>상태</th>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="check" id="check1"><label for="check1"><label></td>
+                    <td><label for="check1"></label></td>
+                    <td><label for="check1"></label></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="check" id="check1"><label for="check1"><label></td>
+                    <td><label for="check1"></label></td>
+                    <td><label for="check1"></label></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="check" id="check1"><label for="check1"><label></td>
+                    <td><label for="check1"></label></td>
+                    <td><label for="check1"></label></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="check" id="check1"><label for="check1"><label></td>
+                    <td><label for="check1"></label></td>
+                    <td><label for="check1"></label></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="check" id="check1"><label for="check1"><label></td>
+                    <td><label for="check1"></label></td>
+                    <td><label for="check1"></label></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="check" id="check1"><label for="check1"><label></td>
+                    <td><label for="check1"></label></td>
+                    <td><label for="check1"></label></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="check" id="check1"><label for="check1"><label></td>
+                    <td><label for="check1"></label></td>
+                    <td><label for="check1"></label></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="check" id="check1"><label for="check1"><label></td>
+                    <td><label for="check1"></label></td>
+                    <td><label for="check1"></label></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="check" id="check1"><label for="check1"><label></td>
+                    <td><label for="check1"></label></td>
+                    <td><label for="check1"></label></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="check" id="check1"><label for="check1"><label></td>
+                    <td><label for="check1"></label></td>
+                    <td><label for="check1"></label></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </table>
+
+                <!-- pagination 시작 -->
+                <div class="pagination">
+                    <ul>
+                      <!-- <li class="prev"><a href="#">prev</a></li>
+                      <li><a href="#" class="on">1</a></li>
+                      <li><a href="#">2</a></li>
+                      <li><a href="#">3</a></li>
+                      <li><a href="#">4</a></li>
+                      <li><a href="#">5</a></li>
+                      <li class="next"><a href="#">next</a></li> -->
+                    </ul>
+                </div>
+                <!-- pagination 끝 -->
+              </div>
+
+              <!-- 하단 버튼 영역 시작 -->
+              <div class="btnWrap">
+                <input type="button" class="btn" value="로드" onclick="clickLoad();">
+                <input type="button" class="btn" value="평가실행" onclick="buttonLoad_click();">
+                <input type="button" class="btn" value="상세결과" onclick="buttonLoad_click();">
+                <!-- <input type="reset" class="btn" value="초기화" onclick="buttonReset_click();"> -->
+                <input type="button" class="btn" value="종료" onclick="location.href='/users/logout'">
+              </div>
+              <!-- 하단 버튼 영역 끝 -->
+            </fielset>
+          </form>
+
+        </div>
+      </div>
+
+
+      <!-- 푸터 영역 시작 -->
+      <div id="footer">
+         Copyright ⓒ 2018 All Rights Reserved.
+      </div>
+      <!-- 푸터 영역 끝 -->
+      <script type="text/javascript">
+
+      function clickLoad(){
+        var evalRows = $("#evalRows").val()
+        console.log(evalRows);
+        var goUrl = '/main/load?pageRows='+evalRows;
+        $(location).attr('href', goUrl);
+      }
+
+
+      function buttonLoad_click(){
+        window.alert("로드를 먼저 실행해 주세요");
+      }
+
+      function buttonReset_click(){
+        window.alert("로드를 먼저 실행해 주세요");
+      }
+
+      </script>
+    </div>
+  </body>
+</html>
