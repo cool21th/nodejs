@@ -46,4 +46,46 @@ NodeJS 가 single Thread로 되어 있다는 말은 틀린말이다. Event Loop�
         console.log('2:',Date.now() - start);
     });
     
+    #결과
+    2: 926
+    1: 928
+    
 thread.js 를 실행하면, 1과 2가 동시에 실행되는 것을 알수 있다.  이것이 가능한 이유는 libuv(thread pool 보유)에서 처리하기 때문이다
+
+    # threads.js
+    const crypto = require('crypto');
+
+    const start = Date.now();
+    # 1
+    crypto.pbkdf2('a','b',100000,512,'sha512',()=>{
+        console.log('1:',Date.now() - start);
+    });
+    
+    #2
+    crypto.pbkdf2('a','b',100000,512,'sha512',()=>{
+        console.log('2:',Date.now() - start);
+    });
+    
+    #3
+    crypto.pbkdf2('a','b',100000,512,'sha512',()=>{
+        console.log('3:',Date.now() - start);
+    });
+    
+    #4
+    crypto.pbkdf2('a','b',100000,512,'sha512',()=>{
+        console.log('4:',Date.now() - start);
+    });
+    
+    #5
+    crypto.pbkdf2('a','b',100000,512,'sha512',()=>{
+        console.log('5:',Date.now() - start);
+    });
+    
+    # 결과
+    3: 963
+    4: 966
+    2: 973
+    1: 1008
+    5: 1848
+    
+libuv 의 Thread Pool 내부의 Thread 개수가 4개인 것을 확인할 수 있다
