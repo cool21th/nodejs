@@ -1,5 +1,6 @@
 # nodejs
 
+## Internals of Node
 nodejs 는 V8(by Google) Engine, libuv(C++ opensource Project)에서 구동된다
 [참고: nodejs의 내부 동작 원리](http://sjh836.tistory.com/149)
 
@@ -131,4 +132,10 @@ thread pool의 사이즈 조정이 가능하다 ex) process.env.UV_THREADPOOL_SI
 앞서 Thread Pool이 4개였을 때의 경우와 다르게 7개의 function이 동일하게 수행되는 것을 볼 수 있다. 이것은 libuv os delegation이 수행된 것임을 확인할 수 있다 즉, Operating System이 수행을 하고, libuv의 thread pool을 건들지 않게 되는 것이다
 
 OS's async로 처리되는 케이스는 모든 OS를 위한 networking library (request, receive, setting up a listener on some port)가 된다
+
+
+## Enhancing Node Performance
+
+Node의 성능향상을 위해 Cluster mode 를 추천한다
+
 
