@@ -26,3 +26,24 @@ Node' Crypto Library : [pbkdf2 JS 영역](https://github.com/nodejs/node/blob/ma
 ### Node Event Loop
 
 Node Program은 one Thread안에 Event Loop로 되어있다
+
+    Node Evnet Loop             ->  Single Threaded
+    Some of Node FWK/Std Lib    ->  Not single Threaded
+
+NodeJS 가 single Thread로 되어 있다는 말은 틀린말이다. Event Loop이 single thread로 되어있다는게 맞는 말이다.
+
+    # threads.js
+    const crypto = require('crypto');
+
+    # 1
+    const start = Date.now();
+    crypto.pbkdf2('a','b',100000,512,'sha512',()=>{
+        console.log('1:',Date.now() - start);
+    });
+    
+    # 2
+    crypto.pbkdf2('a','b',100000,512,'sha512',()=>{
+        console.log('2:',Date.now() - start);
+    });
+    
+thread.js 를 실행하면, 1과 2가 동시에 실행되는 것을 알수 있다.  이것이 가능한 이유는 libuv(thread pool 보유)에서 처리하기 때문이다
