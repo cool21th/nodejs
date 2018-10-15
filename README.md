@@ -25,4 +25,4 @@ Node' Crypto Library : [pbkdf2 JS 영역](https://github.com/nodejs/node/blob/ma
 
 ### Node Event Loop
 
-Node Program은 one Threads안에 Event Loop로 되어있다
+Node Program은 one Thread안에 Event Loop로 되어있다
