@@ -89,3 +89,46 @@ thread.js 를 실행하면, 1과 2가 동시에 실행되는 것을 알수 있�
     5: 1848
     
 libuv 의 Thread Pool 내부의 Thread 개수가 4개인 것을 확인할 수 있다
+thread pool의 사이즈 조정이 가능하다 ex) process.env.UV_THREADPOOL_SIZE = 2 
+
+### OS Operation
+
+    #async.js
+    
+    const https = require('https');
+
+    const start = Date.now()
+
+
+    function doRequest() {
+
+        https.request('https://www.google.com', res => {
+            res.on('data', ()=> {});
+            res.on('end', () => {
+                console.log(Date.now() -start);
+            });
+        })
+        .end();
+    }
+
+    doRequest();
+    doRequest();
+    doRequest();
+    doRequest();
+    doRequest();
+    doRequest();
+    doRequest();
+    
+    # 결과 
+    354
+    358
+    359
+    363
+    364
+    365
+    390
+
+앞서 Thread Pool이 4개였을 때의 경우와 다르게 7개의 function이 동일하게 수행되는 것을 볼 수 있다. 이것은 libuv os delegation이 수행된 것임을 확인할 수 있다 즉, Operating System이 수행을 하고, libuv의 thread pool을 건들지 않게 되는 것이다
+
+OS's async로 처리되는 케이스는 모든 OS를 위한 networking library (request, receive, setting up a listener on some port)가 된다
+
