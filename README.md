@@ -136,6 +136,45 @@ OS's async로 처리되는 케이스는 모든 OS를 위한 networking library (
 
 ## Enhancing Node Performance
 
+
+### Cluster mode
+
 Node의 성능향상을 위해 Cluster mode 를 추천한다
+Node의 Cluster Manager에서 cluster.fork()를 관리하며 호출하여 Thread실행하도록 한다
+
+    #index.js
+    const cluster = require('cluster');
+
+    // Is the file being excuted in master mode?
+    if (cluster.isMaster){
+        // Cause index.js to be excuted *again* but in child mode
+        cluster.fork();
+        // cluster.fork();
+        // cluster.fork();
+        // cluster.fork();
+    }else {
+        // I'm a child, I'm going to act like a sever and do nothing else
+        const express = require('express');
+        const app = express();
+
+        function doWork(duration) {
+            const start = Date.now();
+            while(Date.now() - start < duration){}
+        }
+
+        app.get('/', (req, res) => {
+            doWork(5000);
+            res.send('Hi there');
+        });
+
+        app.get('/fast', (req, res) => {
+            res.send('This was fast!!');
+        })
+
+        app.listen(3000);
+    }
+    
+
+[PM2 Module](https://github.com/Unitech/pm2), [PM2 Doc](http://pm2.io)
 
 
